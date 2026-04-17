@@ -6,20 +6,20 @@ def check_url(url):
     score = 0
 
     if "@" in url:
-        score += 1
+        score += 25
     if len(url) > 75:
-        score += 1
+        score += 25
     if "https" not in url:
-        score += 1
+        score += 25
     if any(word in url for word in ["login", "verify", "bank"]):
-        score += 1
+        score += 25
 
-    if score >= 3:
-        return "Phishing"
-    elif score == 2:
-        return "Suspicious"
+    if score >= 75:
+        return "Phishing", score
+    elif score >= 50:
+        return "Suspicious", score
     else:
-        return "Safe"
+        return "Safe", score
 
 
 @app.route("/", methods=["GET", "POST"])
