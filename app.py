@@ -25,10 +25,13 @@ def check_url(url):
 @app.route("/", methods=["GET", "POST"])
 def home():
     result = ""
+    score = 0
+
     if request.method == "POST":
         url = request.form["url"]
-        result = check_url(url)
-    return render_template("index.html", result=result)
+        result, score = check_url(url)
+
+    return render_template("index.html", result=result, score=score)
 
 
 if __name__ == "__main__":
