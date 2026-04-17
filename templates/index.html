@@ -2,15 +2,65 @@
 <html>
 <head>
     <title>Phishing Detector</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        input {
+            padding: 12px;
+            width: 250px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            background: #00c6ff;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .safe { color: #00ff88; }
+        .phishing { color: red; }
+        .suspicious { color: orange; }
+    </style>
 </head>
 <body>
-    <h2>Phishing URL Detector 🔐</h2>
 
-    <form method="POST">
-        <input type="text" name="url" placeholder="Enter URL" required>
-        <button type="submit">Check</button>
-    </form>
+    <div class="box">
+        <h1>🔐 Phishing URL Detector</h1>
 
-    <h3>{{ result }}</h3>
+        <form method="POST">
+            <input type="text" name="url" placeholder="Enter URL..." required>
+            <br><br>
+            <button type="submit">Check</button>
+        </form>
+
+        {% if result %}
+            <h2 class="
+                {% if result == 'Safe' %}safe
+                {% elif result == 'Phishing' %}phishing
+                {% else %}suspicious
+                {% endif %}
+            ">
+                {{ result }}
+            </h2>
+        {% endif %}
+    </div>
+
 </body>
 </html>
